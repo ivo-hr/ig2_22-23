@@ -14,7 +14,17 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
-  //else if (evt.keysym.sym == SDLK_???)
+  else if (evt.keysym.sym == SDLK_g) {
+	  mSM->getSceneNode("nClock")->roll(Degree(1));
+
+  }
+  else if (evt.keysym.sym == SDLK_h) {
+	  for (int i = 0; i < 12; i++)
+	  {
+
+	  }
+	  mSM->getSceneNode("Hours")->pitch(Degree(1));
+  }
   
   return true;
 }
@@ -86,7 +96,7 @@ void IG2App::setupScene(void)
   //mLightNode = mCamNode->createChildSceneNode("nLuz");
   mLightNode->attachObject(luz);
 
-  mLightNode->setDirection(Ogre::Vector3(0, 1, 0));  //vec3.normalise();
+  mLightNode->setDirection(Ogre::Vector3(-1, -1, -1));  //vec3.normalise();
   //lightNode->setPosition(0, 0, 1000);
  
   //------------------------------------------------------------------------
@@ -125,10 +135,33 @@ void IG2App::setupScene(void)
 	  Ogre::SceneNode* horita = hours->createChildSceneNode("Hora " + std::to_string(i));
 	  Ogre::Entity* sph = mSM->createEntity("sphere.mesh");
 	  horita->attachObject(sph);
-	  if (i%2 == 0) horita->setScale(Vector3(0.5, 0.5, 0.5));
-	  else horita->setScale(Vector3(0.3, 0.3, 0.3));
+		  if (i%2 == 0) horita->setScale(Vector3(0.5, 0.5, 0.5));
+		  else horita->setScale(Vector3(0.3, 0.3, 0.3));
 	  horita->setPosition(Vector3(Ogre::Math::Cos(Degree(angl)) * 300, Ogre::Math::Sin(Degree(angl)) * 300, 0));
   }
+
+
+  Ogre::SceneNode* HourH = clock->createChildSceneNode("horasMan");
+  Ogre::SceneNode* MinH = clock->createChildSceneNode("minMan");
+  Ogre::SceneNode* SecH = clock->createChildSceneNode("secMan");
+
+  Ogre::Entity* rec0 = mSM->createEntity("cube.mesh");
+  HourH->attachObject(rec0);
+  HourH->setScale(Vector3(0.3, 2, 0.1));
+  HourH->roll(Ogre::Radian(Ogre::Math::PI / 2));
+  HourH->setPosition(Vector3(75, 0, 0));
+  Ogre::Entity* rec1 = mSM->createEntity("cube.mesh");
+  MinH->attachObject(rec1);
+  MinH->setScale(Vector3(0.2, 3, 0.1));
+  //MinH->roll(Ogre::Radian(Ogre::Math::PI / 2));
+  MinH->setPosition(Vector3(0, 100, 0));
+  Ogre::Entity* rec2 = mSM->createEntity("cube.mesh");
+  SecH->attachObject(rec2);
+  SecH->setScale(Vector3(0.1, 3.5, 0.1));
+  SecH->roll(Ogre::Radian(3 * Ogre::Math::PI / 4));
+  SecH->setPosition(Vector3(-50, -50, 0));
+  
+
 
 
   //------------------------------------------------------------------------
@@ -137,6 +170,8 @@ void IG2App::setupScene(void)
   addInputListener(mCamMgr);
   mCamMgr->setStyle(OgreBites::CS_ORBIT);  
   
+
+
   //mCamMgr->setTarget(mSinbadNode);  
   //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
