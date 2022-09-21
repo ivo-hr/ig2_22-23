@@ -92,7 +92,7 @@ void IG2App::setupScene(void)
   //------------------------------------------------------------------------
 
   // finally something to render
-
+  /*
   Ogre::Entity* ent = mSM->createEntity("facial.mesh");
 
   mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
@@ -111,6 +111,25 @@ void IG2App::setupScene(void)
 
   mFloorNode->attachObject(floor);
   mCielinNode->attachObject(cielin);
+  */
+
+  //Ogre::Entity* sph = mSM->createEntity("sphere.mesh");
+
+  Ogre::SceneNode* clock = mSM->getRootSceneNode()->createChildSceneNode("nClock");
+  Ogre::SceneNode* hours = clock->createChildSceneNode("Hours");
+
+  for (int i = 0; i < 12; i++) {
+
+	  int angl = 360 / 12 * i;
+
+	  Ogre::SceneNode* horita = hours->createChildSceneNode("Hora " + std::to_string(i));
+	  Ogre::Entity* sph = mSM->createEntity("sphere.mesh");
+	  horita->attachObject(sph);
+	  if (i%2 == 0) horita->setScale(Vector3(0.5, 0.5, 0.5));
+	  else horita->setScale(Vector3(0.3, 0.3, 0.3));
+	  horita->setPosition(Vector3(Ogre::Math::Cos(Degree(angl)) * 300, Ogre::Math::Sin(Degree(angl)) * 300, 0));
+  }
+
 
   //------------------------------------------------------------------------
 
