@@ -21,9 +21,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   else if (evt.keysym.sym == SDLK_h) {
 	  for (int i = 0; i < 12; i++)
 	  {
-
+		  mSM->getSceneNode("Hora " + std::to_string(i))->yaw(Degree(1));
 	  }
-	  mSM->getSceneNode("Hours")->pitch(Degree(1));
   }
   
   return true;
