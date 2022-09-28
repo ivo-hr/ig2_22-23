@@ -10,15 +10,18 @@
 #include <OgreKeyFrame.h>
 #include <iostream>
 
+using namespace Ogre;
+
 class AspaNoria : public OgreBites::InputListener {
 
 public:
-	void Noria(Ogre::SceneNode* node);
-    ~Noria();
+	AspaNoria(SceneNode* node);
+    ~AspaNoria();
 
 protected:
 	SceneNode* mNode;
 	SceneManager* mSM;
+	
 };
 
 

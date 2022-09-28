@@ -475,17 +475,11 @@ C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\OGREsdk\include\OG
 C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\OgreTrays.h(189): message : see declaration of 'std::vector<OgreBites::Widget *,std::allocator<OgreBites::Widget *>>'
 C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\OgreTrays.h(1174,20): warning C4251: 'OgreBites::TrayManager::mWidgetDeathRow': class 'std::vector<OgreBites::Widget *,std::allocator<OgreBites::Widget *>>' needs to have dll-interface to be used by clients of class 'OgreBites::TrayManager'
 C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\OgreTrays.h(189): message : see declaration of 'std::vector<OgreBites::Widget *,std::allocator<OgreBites::Widget *>>'
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(86,57): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(140,48): warning C4305: 'argument': truncation from 'double' to 'const Ogre::Real'
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(141,55): warning C4244: 'argument': conversion from 'int' to 'Ogre::Real', possible loss of data
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(141,92): warning C4244: 'argument': conversion from 'int' to 'Ogre::Real', possible loss of data
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(151,38): warning C4305: 'argument': truncation from 'double' to 'const Ogre::Real'
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(156,37): warning C4305: 'argument': truncation from 'double' to 'const Ogre::Real'
-C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(161,39): warning C4305: 'argument': truncation from 'double' to 'const Ogre::Real'
+C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\IG2App\IG2App.cpp(90,57): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating code
-  2 of 629 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  1 of 647 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-SDL2main.lib(SDL_windows_main.obj) : warning LNK4099: PDB '' was not found with 'SDL2main.lib(SDL_windows_main.obj)' or at ''; linking object as if no debug info
+SDL2main.lib(SDL_windows_main.obj) : warning LNK4099: PDB 'SDL2main.pdb' was not found with 'SDL2main.lib(SDL_windows_main.obj)' or at 'C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\bin\SDL2main.pdb'; linking object as if no debug info
   IG2App.vcxproj -> C:\Users\enriq\Documents\ig2_22-23\prac1\ProyectosOGREvc15x86\bin\IG2AppRelease.exe

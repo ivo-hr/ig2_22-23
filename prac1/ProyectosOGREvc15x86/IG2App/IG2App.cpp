@@ -6,6 +6,9 @@
 #include <OgreMeshManager.h>
 #include <OgreBitesConfigDialog.h>
 
+#include "AspaNoria.h"
+#include "Noria.h"
+
 using namespace Ogre;
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -60,6 +63,9 @@ void IG2App::setup(void)
   addInputListener(mTrayMgr);
 
   addInputListener(this);   
+
+
+
   setupScene();
 }
 
@@ -101,6 +107,31 @@ void IG2App::setupScene(void)
   //------------------------------------------------------------------------
 
   // finally something to render
+
+  //Ogre::SceneNode* mAspaNode = mSM->getRootSceneNode()->createChildSceneNode("Aspa");
+
+  //AspaNoria* noria = new AspaNoria(mAspaNode);
+
+  MeshManager::getSingleton().createPlane("mPlane5000x",
+	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  Plane(Vector3::UNIT_Y, 0),
+	  5000, 5000, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+
+  Ogre::Entity* plane = mSM->createEntity("mPlane5000x");
+
+  Ogre::SceneNode* mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("plano");
+   
+  mPlanoNode->attachObject(plane);
+
+
+  Ogre::SceneNode* mNoriaNode = mPlanoNode->createChildSceneNode("Noria");
+
+  Noria* noria = new Noria(mNoriaNode, 10, 2);
+
+  addInputListener(noria);
+
+  mNoriaNode->setPosition(0, 0, 0);
+
   /*
   Ogre::Entity* ent = mSM->createEntity("facial.mesh");
 
@@ -124,6 +155,7 @@ void IG2App::setupScene(void)
 
   //Ogre::Entity* sph = mSM->createEntity("sphere.mesh");
 
+  /*
   Ogre::SceneNode* clock = mSM->getRootSceneNode()->createChildSceneNode("nClock");
   Ogre::SceneNode* hours = clock->createChildSceneNode("Hours");
 
@@ -159,7 +191,7 @@ void IG2App::setupScene(void)
   SecH->setScale(Vector3(0.1, 3.5, 0.1));
   SecH->roll(Ogre::Radian(3 * Ogre::Math::PI / 4));
   SecH->setPosition(Vector3(-50, -50, 0));
-  
+  */
 
 
 
