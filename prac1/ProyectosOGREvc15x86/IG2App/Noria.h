@@ -23,6 +23,7 @@ public:
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 
+	void unroll(AspaNoria* aspa, int angl);
 
 
 protected:
@@ -30,7 +31,7 @@ protected:
 	SceneManager* mSM;
 	int numAspas = 4;
 	int speed = 1;
-
+	std::vector<AspaNoria*> aspas;
 };
 
 

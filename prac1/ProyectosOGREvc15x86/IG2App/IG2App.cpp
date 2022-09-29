@@ -8,6 +8,7 @@
 
 #include "AspaNoria.h"
 #include "Noria.h"
+#include "Muneco.h"
 
 using namespace Ogre;
 
@@ -131,6 +132,13 @@ void IG2App::setupScene(void)
   addInputListener(noria);
 
   mNoriaNode->setPosition(0, 0, 0);
+
+
+  Ogre::SceneNode* mMunecoNode = mPlanoNode->createChildSceneNode("Muneco");
+
+  Muneco* muneco = new Muneco(mMunecoNode);
+  mMunecoNode->setPosition(1000, 200, 1000);
+
 
   /*
   Ogre::Entity* ent = mSM->createEntity("facial.mesh");

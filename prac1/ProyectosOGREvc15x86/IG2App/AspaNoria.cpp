@@ -9,7 +9,7 @@ AspaNoria::AspaNoria(Ogre::SceneNode* node) {
 
 	Ogre::SceneNode* Aspa1 = mNode->createChildSceneNode();
 	Ogre::SceneNode* Aspa2 = mNode->createChildSceneNode();
-	Ogre::SceneNode* Cubo = mNode->createChildSceneNode();
+	cubo = mNode->createChildSceneNode();
 
 	Ogre::Entity* rec0 = mSM->createEntity("cube.mesh");
 	Aspa1->attachObject(rec0);
@@ -23,13 +23,18 @@ AspaNoria::AspaNoria(Ogre::SceneNode* node) {
 
 
 	Ogre::Entity* rec2 = mSM->createEntity("cube.mesh");
-	Cubo->attachObject(rec2);
-	Cubo->setScale(Vector3(2, 2, 2));
-	Cubo->setPosition(Vector3(400, 0, 0));
-	Cubo->setInheritOrientation(false);
+	cubo->attachObject(rec2);
+	cubo->setScale(Vector3(2, 2, 2));
+	cubo->setPosition(Vector3(400, 0, 0));
+	//Cubo->setInheritOrientation(false);
   
 }
 
 AspaNoria::~AspaNoria()
 {
+}
+
+SceneNode* AspaNoria::getCube()
+{
+	return cubo;
 }

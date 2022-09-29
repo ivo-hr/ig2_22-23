@@ -9,19 +9,21 @@ Noria::Noria(SceneNode* node, int n, int q)
 	Ogre::SceneNode* barr = mNode->createChildSceneNode();
 	barr->attachObject(mSM->createEntity("Barrel.mesh"));
 	barr->pitch(Degree(90));
-	barr->setScale(40, 40, 50);
-	barr->setInheritOrientation(false);
+	barr->setScale(40, 50, 40);
+	//barr->setInheritOrientation(false);
 
 	for (int i = 0; i < n; i++) {
 
 		int angl = 360 / n * i;
 
-		Ogre::SceneNode* noria = mNode->createChildSceneNode();
+		Ogre::SceneNode* aspa = mNode->createChildSceneNode();
 		
-		new AspaNoria(noria);
+		AspaNoria* asp = new AspaNoria(aspa);
 
-		noria->roll(Degree(angl));
-		noria->translate(500, 0, 0, Ogre::Node::TS_LOCAL);
+		aspas.push_back(asp);
+		aspa->roll(Degree(angl));
+		unroll(asp, angl);
+		aspa->translate(500, 0, 0, Ogre::Node::TS_LOCAL);
 
 
 	}
@@ -35,6 +37,10 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_q) {
 		mNode->roll(Degree(speed));
+
+		for (auto aspa : aspas)
+			unroll(aspa, speed);
+		
 	}
 
 	return false;
@@ -43,4 +49,12 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 void Noria::frameRendered(const Ogre::FrameEvent& evt)
 {
 	mNode->roll(Degree(-speed));
+	for (auto aspa : aspas)
+		unroll(aspa, -speed);
+	
+}
+
+void Noria::unroll(AspaNoria* aspa, int angl)
+{
+	aspa->getCube()->roll(Degree(-angl));
 }
