@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Extras
+/ig2_22-23/prac1/ProyectosOGREvc15x86/.vs/

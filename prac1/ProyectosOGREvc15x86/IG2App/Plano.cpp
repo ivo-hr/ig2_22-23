@@ -30,6 +30,7 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	else if (evt.keysym.sym == SDLK_r) {
 		sendEvent(EntidadIG::msg_Ferris, this);
 		sendEvent(EntidadIG::msg_Man, this);
+		std::cout << "Messages sent!" << std::endl;
 	}
 
 

@@ -60,7 +60,7 @@ void Noria::receiveEvent(MessageType msgType, EntidadIG* ent)
 	switch (msgType) {
 	case msg_Ferris:
 		isRot = !isRot;
-		std::cout << "Noria rotation = " + isRot << std::endl;
+		std::cout << "Noria recieved message!" << std::endl;
 		break;
 	default:
 		break;

@@ -42,12 +42,12 @@ void Muneco::frameRendered(const Ogre::FrameEvent& evt)
 	}
 }
 
-void Muneco::recieveEvent(MessageType msgType, EntidadIG* ent)
+void Muneco::receiveEvent(MessageType msgType, EntidadIG* ent)
 {
 	switch (msgType){
 	case msg_Man:
-		isRot != isRot;
-		std::cout << "Muneco rotation = " + isRot << std::endl;
+		isRot = !isRot;
+		std::cout << "Muneco recieved message!"<< std::endl;
 		break;
 	default:
 		break;

@@ -11,12 +11,14 @@ public:
 	Noria(SceneNode* node, int n, int q);
 	~Noria();
 
+
+
+protected:
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	virtual void receiveEvent(MessageType msgType, EntidadIG* ent);
 	void unroll(AspaNoria* aspa, int angl);
 
-protected:
 	SceneNode* mNode;
 	SceneManager* mSM;
 	int numAspas = 4;
