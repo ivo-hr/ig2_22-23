@@ -1,9 +1,7 @@
 #include "AspaNoria.h"
 
 
-
-
-AspaNoria::AspaNoria(Ogre::SceneNode* node) {
+AspaNoria::AspaNoria(Ogre::SceneNode* node) : EntidadIG(node) {
 	mNode = node;
 	mSM = mNode->getCreator();
 

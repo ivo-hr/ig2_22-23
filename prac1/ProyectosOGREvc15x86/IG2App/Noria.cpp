@@ -1,6 +1,6 @@
 #include "Noria.h"
 
-Noria::Noria(SceneNode* node, int n, int q)
+Noria::Noria(SceneNode* node, int n, int q) : EntidadIG(node)
 {
 	mNode = node;
 	mSM = mNode->getCreator();
@@ -35,7 +35,7 @@ Noria::~Noria()
 
 bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_q) {
+	if (evt.keysym.sym == SDLK_q && !isRot) {
 		mNode->roll(Degree(speed));
 
 		for (auto aspa : aspas)
@@ -48,10 +48,23 @@ bool Noria::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 void Noria::frameRendered(const Ogre::FrameEvent& evt)
 {
-	mNode->roll(Degree(-speed));
-	for (auto aspa : aspas)
-		unroll(aspa, -speed);
-	
+	if (isRot) {
+		mNode->roll(Degree(-speed));
+		for (auto aspa : aspas)
+			unroll(aspa, -speed);
+	}
+}
+
+void Noria::receiveEvent(MessageType msgType, EntidadIG* ent)
+{
+	switch (msgType) {
+	case msg_Ferris:
+		isRot = !isRot;
+		std::cout << "Noria rotation = " + isRot << std::endl;
+		break;
+	default:
+		break;
+	}
 }
 
 void Noria::unroll(AspaNoria* aspa, int angl)

@@ -9,6 +9,8 @@
 #include "AspaNoria.h"
 #include "Noria.h"
 #include "Muneco.h"
+#include "EntidadIG.h"
+#include "Plano.h"
 
 using namespace Ogre;
 
@@ -18,7 +20,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
-  else if (evt.keysym.sym == SDLK_g) {
+  /*else if (evt.keysym.sym == SDLK_g) {
 	  mSM->getSceneNode("nClock")->roll(Degree(1));
 
   }
@@ -27,7 +29,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  {
 		  mSM->getSceneNode("Hora " + std::to_string(i))->yaw(Degree(1));
 	  }
-  }
+  }*/
   
   return true;
 }
@@ -118,26 +120,33 @@ void IG2App::setupScene(void)
 	  Plane(Vector3::UNIT_Y, 0),
 	  5000, 5000, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
-  Ogre::Entity* plane = mSM->createEntity("mPlane5000x");
+  //Ogre::Entity* plane = mSM->createEntity("mPlane5000x");
 
   Ogre::SceneNode* mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("plano");
-   
-  mPlanoNode->attachObject(plane);
+  
+  Plano* plane = new Plano(mPlanoNode);
+  for (auto inputs : EntidadIG::appListeners) {
+	  addInputListener(inputs);
+  }
+
+  //mPlanoNode->attachObject(plane);
+  //mPlanoNode->scale(Vector3(0.5, 0.5, 0.5));
+
+  //Ogre::SceneNode* mNoriaNode = mPlanoNode->createChildSceneNode("Noria");
+
+  //Noria* noria = new Noria(mNoriaNode, 10, 2);
+
+  //addInputListener(noria);
+
+  //mNoriaNode->setPosition(0, 0, 0);
 
 
-  Ogre::SceneNode* mNoriaNode = mPlanoNode->createChildSceneNode("Noria");
+  //Ogre::SceneNode* mMunecoNode = mPlanoNode->createChildSceneNode("Muneco");
 
-  Noria* noria = new Noria(mNoriaNode, 10, 2);
-
-  addInputListener(noria);
-
-  mNoriaNode->setPosition(0, 0, 0);
+  //Muneco* muneco = new Muneco(mMunecoNode);
+  //mMunecoNode->setPosition(1000, 200, 1000);
 
 
-  Ogre::SceneNode* mMunecoNode = mPlanoNode->createChildSceneNode("Muneco");
-
-  Muneco* muneco = new Muneco(mMunecoNode);
-  mMunecoNode->setPosition(1000, 200, 1000);
 
 
   /*

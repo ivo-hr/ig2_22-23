@@ -1,19 +1,10 @@
 #pragma once
-#include <OgreSceneManager.h>
-#include <OgreSceneNode.h>
-#include <OgreEntity.h>
-#include <OgreMeshManager.h>
-#include <OgreInput.h>
-#include <SDL_keycode.h>
-#include <OgreFrameListener.h>
-#include <OgreAnimation.h>
-#include <OgreKeyFrame.h>
-#include <iostream>
+#include "EntidadIG.h"
 
 
 using namespace Ogre;
 
-class Muneco : public OgreBites::InputListener {
+class Muneco : public EntidadIG {
 
 public:
 	Muneco(SceneNode* node);
@@ -21,12 +12,16 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
-
+	virtual void recieveEvent(MessageType msgType, EntidadIG* ent);
 
 
 protected:
+
 	SceneNode* cuello;
+	SceneNode* cabeza;
+	SceneNode* cuerpo;
 	SceneManager* mSM;
+	bool isRot = false;
 
 };
 
