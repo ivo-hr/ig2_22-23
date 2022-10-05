@@ -125,6 +125,22 @@ void IG2App::setupScene(void)
   Ogre::SceneNode* mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("plano");
   
   Plano* plane = new Plano(mPlanoNode);
+
+
+  SceneNode* mNoriaN = mPlanoNode->createChildSceneNode();
+  Noria* mNoria = new Noria(mNoriaN, 10, 5);
+  mNoriaN->scale(0.5, 0.5, 0.5);
+
+
+  SceneNode* mMunecoN = mPlanoNode->createChildSceneNode();
+  Muneco* mMuneco = new Muneco(mMunecoN);
+  mMunecoN->translate(200, 100, 200);
+  mMunecoN->scale(0.5, 0.5, 0.5);
+
+  EntidadIG::addListener(plane);
+  EntidadIG::addListener(mNoria);
+  EntidadIG::addListener(mMuneco);
+
   for (auto inputs : EntidadIG::appListeners) {
 	  addInputListener(inputs);
   }
