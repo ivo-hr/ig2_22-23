@@ -9,5 +9,9 @@ public:
 
 protected:
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+
+	bool anim = true;
+
+	Ogre::Entity* plane;
 };
 

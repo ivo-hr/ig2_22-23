@@ -7,7 +7,11 @@ Noria::Noria(SceneNode* node, int n, int q) : EntidadIG(node)
 	speed = q;
 
 	Ogre::SceneNode* barr = mNode->createChildSceneNode();
-	barr->attachObject(mSM->createEntity("Barrel.mesh"));
+
+	Entity* cyl = mSM->createEntity("Barrel.mesh");
+	cyl->setMaterialName("Practica1/eje");
+
+	barr->attachObject(cyl);
 	barr->pitch(Degree(90));
 	barr->setScale(40, 50, 40);
 	//barr->setInheritOrientation(false);
@@ -24,7 +28,7 @@ Noria::Noria(SceneNode* node, int n, int q) : EntidadIG(node)
 		aspa->roll(Degree(angl));
 		unroll(asp, angl);
 		aspa->translate(500, 0, 0, Ogre::Node::TS_LOCAL);
-
+		
 
 	}
 }

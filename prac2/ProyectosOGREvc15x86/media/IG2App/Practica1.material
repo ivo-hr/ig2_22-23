@@ -1,0 +1,196 @@
+material Practica1/cuerpo{
+    technique{
+        pass{
+            diffuse 0.77 0.52 0.22 1.00
+            ambient 0.66 0.50 0.08 1.00
+
+
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.60 0.40 0.18 1.00
+        }
+    }
+}
+
+material Practica1/nariz{
+    technique{
+        pass{
+            diffuse 1.00 0.58 0.00 1.00
+            ambient 0.66 0.50 0.08 1.00
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.53 0.00 1.00
+
+        }
+    }
+}
+
+material Practica1/ombligo{
+    technique{
+        pass{
+            diffuse 1.00 0.18 0.00 1.00
+            ambient 0.66 0.20 0.08 1.00
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }
+}
+
+material Practica1/aspa{
+    technique{
+        pass{
+            diffuse 0.29 0.19 0.07 1.00
+            ambient 0.18 0.14 0.03 1.00
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.38 0.24 0.08 1.00
+        }
+    }
+}
+
+material Practica1/eje{
+    technique{
+        pass{
+            diffuse 0.69 0.69 0.69 1.00
+            texture_unit{
+                texture BeachStones.jpg
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.8 0.8 0.8 1.00
+        }
+    }
+}
+
+material Practica1/caja{
+    technique{
+        pass{
+            diffuse 1.00 0.94 0.73 1.00
+            texture_unit{
+                texture BumpyMetal.jpg
+                colour_op add
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 1.00 0.00 1.00
+        }
+    }
+}
+
+material Practica1/agua{
+    technique{
+        pass{
+            diffuse 0.54 0.69 0.71 1.00
+            texture_unit{
+                texture Water02.jpg
+                colour_op add
+                scroll_anim 0.1 0.0
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.00 0.50 1.00 1.00
+        }
+    }
+}
+
+material Practica1/aguaParada{
+    technique{
+        pass{
+            diffuse 0.54 0.69 0.71 1.00
+            texture_unit{
+                texture Water02.jpg
+                colour_op add
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.00 0.50 1.00 1.00
+        }
+    }
+}
+
+material Practica1/cabeza{
+    technique{
+        pass{
+            diffuse 1.00 0.97 0.00 1.00
+            texture_unit{
+                texture spotlight_image.png
+                env_map spherical
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 0.96 1.00 0.00 1.00
+        }
+    }   
+}
+
+material Practica1/culo{
+    technique{
+        pass{
+            diffuse 1.00 1.00 1.00 1.00
+            texture_unit{
+                texture checker.png
+                env_map spherical
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 1.00 1.00 1.00
+        }
+    }   
+}
+
+material Practica1/cabezaRoja{
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+            texture_unit{
+                texture spotlight_image.png
+                colour_op modulate
+                env_map spherical
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }   
+}
+
+material Practica1/culoRojo{
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+            texture_unit{
+                texture checker.png
+                colour_op modulate
+                env_map spherical
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }   
+}

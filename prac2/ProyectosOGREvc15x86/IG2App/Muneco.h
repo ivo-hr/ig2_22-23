@@ -19,6 +19,11 @@ protected:
 	SceneNode* cuello;
 	SceneNode* cabeza;
 	SceneNode* cuerpo;
+
+	Entity* cul;
+
+	Entity* cab;
+
 	SceneManager* mSM;
 	bool isRot = false;
 
