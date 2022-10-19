@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+
 
 # Fortran module files
 *.mod
@@ -24,7 +24,7 @@
 *.lai
 *.la
 *.a
-*.lib
+
 
 # Executables
 *.exe
@@ -33,3 +33,6 @@
 
 # Extras
 /ig2_22-23/prac1/ProyectosOGREvc15x86/.vs/
+/ig2_22-23/prac2/ProyectosOGREvc15x86/.vs/
+
+ProyectosOGREvc15x86.zip
