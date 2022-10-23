@@ -11,6 +11,7 @@
 #include "Muneco.h"
 #include "EntidadIG.h"
 #include "Plano.h"
+#include "AspasNave.h"
 
 using namespace Ogre;
 
@@ -126,8 +127,15 @@ void IG2App::setupScene(void)
   
   Plano* plane = new Plano(mPlanoNode);
 
+  SceneNode* helice = mPlanoNode->createChildSceneNode("helix");
+  AspasNave* aspa = new AspasNave(helice, 5, 10);
 
-  SceneNode* mNoriaN = mPlanoNode->createChildSceneNode();
+  EntidadIG::addListener(plane);
+  EntidadIG::addListener(aspa);
+  for (auto inputs : EntidadIG::appListeners)
+	  addInputListener(inputs);
+
+  /*SceneNode* mNoriaN = mPlanoNode->createChildSceneNode();
   Noria* mNoria = new Noria(mNoriaN, 10, 5);
   mNoriaN->scale(0.5, 0.5, 0.5);
 
@@ -143,7 +151,7 @@ void IG2App::setupScene(void)
 
   for (auto inputs : EntidadIG::appListeners) {
 	  addInputListener(inputs);
-  }
+  }*/
 
   //mPlanoNode->attachObject(plane);
   //mPlanoNode->scale(Vector3(0.5, 0.5, 0.5));
