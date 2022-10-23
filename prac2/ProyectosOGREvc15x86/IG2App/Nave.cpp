@@ -7,30 +7,56 @@ Nave::Nave(SceneNode* node, int n, int q) : EntidadIG(node)
 	speed = q;
 
 	Ogre::SceneNode* barr = mNode->createChildSceneNode();
-
 	Entity* cyl = mSM->createEntity("Barrel.mesh");
-	cyl->setMaterialName("Practica1/eje");
-
+	cyl->setMaterialName("Practica1/nariz");
 	barr->attachObject(cyl);
+	barr->setScale(10, 10, 10);
 	barr->pitch(Degree(90));
-	barr->setScale(40, 50, 40);
-	//barr->setInheritOrientation(false);
+	barr->setPosition(0, 0, -90);
 
-	for (int i = 0; i < n; i++) {
+	Ogre::SceneNode* cuerpo = mNode->createChildSceneNode();
+	Entity* s = mSM->createEntity("sphere.mesh");
+	s->setMaterialName("Practica1/ombligo");
+	cuerpo->attachObject(s);
+	cuerpo->setScale(1, 1, 1);
 
-		int angl = 360 / n * i;
+	Ogre::SceneNode* ninja = mNode->createChildSceneNode();
+	Entity* nj = mSM->createEntity("ninja.mesh");
+	nj->setMaterialName("Practica1/ninja");
+	ninja->attachObject(nj);
+	ninja->setScale(1, 1, 1);
+	ninja->setPosition(0, -50, 0);
 
-		Ogre::SceneNode* aspa = mNode->createChildSceneNode();
-
-		AspaNoria* asp = new AspaNoria(aspa);
-
-		aspas.push_back(asp);
-		aspa->roll(Degree(angl));
-		unroll(asp, angl);
-		aspa->translate(500, 0, 0, Ogre::Node::TS_LOCAL);
+	Ogre::SceneNode* wing0 = mNode->createChildSceneNode();
+	Entity* c1 = mSM->createEntity("cube.mesh");
+	c1->setMaterialName("Practica1/ala");
+	wing0->attachObject(c1);
+	wing0->setScale(3, 0.1, 1);
+	wing0->setPosition(-200, 0, 0);
 
 
-	}
+	Ogre::SceneNode* wing1 = mNode->createChildSceneNode();
+	Entity* c2 = mSM->createEntity("cube.mesh");
+	c2->setMaterialName("Practica1/ala");
+	wing1->attachObject(c2);
+	wing1->setScale(3, 0.1, 1);
+	wing1->setPosition(200, 0, 0);
+
+	Ogre::SceneNode* rotor0 = mNode->createChildSceneNode();
+	AspasNave* asp0 = new AspasNave(rotor0, n, speed);
+	rotor0->setPosition(-200, 0, -50);
+	rotor0->setScale(0.1, 0.1, 0.1);
+	aspas.push_back(asp0);
+
+	Ogre::SceneNode* rotor1 = mNode->createChildSceneNode();
+	AspasNave* asp1 = new AspasNave(rotor1, n, speed);
+	rotor1->setPosition(200, 0, -50);
+	rotor1->setScale(0.1, 0.1, 0.1);
+	aspas.push_back(asp1);
+
+
+	addListener(asp0);
+	addListener(asp1);
 }
 
 Nave::~Nave()
@@ -39,11 +65,10 @@ Nave::~Nave()
 
 bool Nave::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_q && !isRot) {
-		mNode->roll(Degree(speed));
-
+	if (evt.keysym.sym == SDLK_q) {
+		isRot = !isRot;
 		for (auto aspa : aspas)
-			unroll(aspa, speed);
+			aspa->setRot(isRot);
 
 	}
 
@@ -52,11 +77,8 @@ bool Nave::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 void Nave::frameRendered(const Ogre::FrameEvent& evt)
 {
-	if (isRot) {
-		mNode->roll(Degree(-speed));
 		for (auto aspa : aspas)
-			unroll(aspa, -speed);
-	}
+			aspa->setRot(isRot);
 }
 
 void Nave::receiveEvent(MessageType msgType, EntidadIG* ent)
@@ -64,14 +86,9 @@ void Nave::receiveEvent(MessageType msgType, EntidadIG* ent)
 	switch (msgType) {
 	case msg_Ferris:
 		isRot = !isRot;
-		std::cout << "Noria recieved message!" << std::endl;
+		std::cout << "Plane recieved message!" << std::endl;
 		break;
 	default:
 		break;
 	}
-}
-
-void Nave::unroll(AspaNoria* aspa, int angl)
-{
-	aspa->getCube()->roll(Degree(-angl));
 }

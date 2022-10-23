@@ -12,6 +12,7 @@
 #include "EntidadIG.h"
 #include "Plano.h"
 #include "AspasNave.h"
+#include "Nave.h"
 
 using namespace Ogre;
 
@@ -127,11 +128,11 @@ void IG2App::setupScene(void)
   
   Plano* plane = new Plano(mPlanoNode);
 
-  SceneNode* helice = mPlanoNode->createChildSceneNode("helix");
-  AspasNave* aspa = new AspasNave(helice, 5, 10);
+  SceneNode* avion = mPlanoNode->createChildSceneNode("helix");
+  Nave* av = new Nave(avion, 5, 10);
 
   EntidadIG::addListener(plane);
-  EntidadIG::addListener(aspa);
+  EntidadIG::addListener(av);
   for (auto inputs : EntidadIG::appListeners)
 	  addInputListener(inputs);
 

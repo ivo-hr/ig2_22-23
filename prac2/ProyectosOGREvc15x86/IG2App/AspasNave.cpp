@@ -8,7 +8,7 @@ AspasNave::AspasNave(Ogre::SceneNode* node, int num, int speed) : EntidadIG(node
 	vel = speed;
 	Ogre::SceneNode* centre = mNode->createChildSceneNode();
 	Ogre::Entity* centro = mSM->createEntity("Barrel.mesh");
-	centro->setMaterialName("Practica1/caja");
+	centro->setMaterialName("Practica1/ejeAspa");
 	centre->attachObject(centro);
 	centre->setScale(Vector3(30, 30, 30));
 	centre->pitch(Degree(90));
@@ -29,7 +29,7 @@ AspasNave::AspasNave(Ogre::SceneNode* node, int num, int speed) : EntidadIG(node
 		cil->setMaterialName("Practica1/ombligo");
 		Cilindro->attachObject(cil);
 		Cilindro->setScale(Vector3(1, 20, 100));
-		Cilindro->setPosition(Vector3(40, 0, 400));
+		Cilindro->setPosition(Vector3(40, 0, -400));
 
 		cyl.push_back(Cilindro);
 

@@ -10,6 +10,8 @@ public:
 	AspasNave(SceneNode* node, int num, int speed);
 	~AspasNave();
 
+	void setRot(bool set) { isRot = set; };
+
 	void unroll(SceneNode* obj, int angl);
 
 	std::vector <SceneNode*> cyl;
@@ -19,7 +21,7 @@ protected:
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	SceneManager* mSM;
 	int numAspas, vel;
-	bool isRot = true;
+	bool isRot = false;
 
 };
 

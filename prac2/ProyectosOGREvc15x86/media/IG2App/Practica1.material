@@ -194,3 +194,51 @@ material Practica1/culoRojo{
         }
     }   
 }
+
+material Practica1/ejeAspa{
+    technique{
+        pass{
+            diffuse 1.00 1.00 1.00 1.00
+            texture_unit{
+                texture RustySteel.jpg
+                colour_op modulate
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }   
+}
+
+material Practica1/ala{
+    technique{
+        pass{
+            diffuse 1.00 1.00 1.00 1.00
+            texture_unit{
+                texture checker.png
+                colour_op modulate
+            }
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }   
+}
+
+material Practica1/ninja{
+    technique{
+        pass{
+            diffuse 0.98 1.00 0.00 1.00
+            ambient 0.00 0.00 0.00 1.00
+        }
+    }
+    technique{
+        pass{
+            diffuse 1.00 0.00 0.00 1.00
+        }
+    }   
+}
