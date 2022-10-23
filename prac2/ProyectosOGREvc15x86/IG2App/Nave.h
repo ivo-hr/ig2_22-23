@@ -25,7 +25,7 @@ protected:
 	SceneManager* mSM;
 	int numAspas = 4;
 	int speed = 1;
-	bool isRot = true;
+	bool isRot = false;
 	std::vector<AspasNave*> aspas;
 };
 

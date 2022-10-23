@@ -43,13 +43,13 @@ Nave::Nave(SceneNode* node, int n, int q) : EntidadIG(node)
 	wing1->setPosition(200, 0, 0);
 
 	Ogre::SceneNode* rotor0 = mNode->createChildSceneNode();
-	AspasNave* asp0 = new AspasNave(rotor0, n, speed);
+	AspasNave* asp0 = new AspasNave(rotor0, n, speed*2);
 	rotor0->setPosition(-200, 0, -50);
 	rotor0->setScale(0.1, 0.1, 0.1);
 	aspas.push_back(asp0);
 
 	Ogre::SceneNode* rotor1 = mNode->createChildSceneNode();
-	AspasNave* asp1 = new AspasNave(rotor1, n, speed);
+	AspasNave* asp1 = new AspasNave(rotor1, n, speed*2);
 	rotor1->setPosition(200, 0, -50);
 	rotor1->setScale(0.1, 0.1, 0.1);
 	aspas.push_back(asp1);
@@ -65,20 +65,35 @@ Nave::~Nave()
 
 bool Nave::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_q) {
-		isRot = !isRot;
-		for (auto aspa : aspas)
-			aspa->setRot(isRot);
 
+	switch (evt.keysym.sym) {
+	case SDLK_w:
+		mNode->translate(Vector3(0, 0, -1) * speed, Ogre::Node::TS_LOCAL);
+		isRot = true;
+		break;
+	case SDLK_a:
+		mNode->yaw((Degree)1 * speed);
+		isRot = true;
+		break;
+	case SDLK_d:
+		mNode->yaw((Degree)-1 * speed);
+		isRot = true;
+		break;
+	case SDLK_s:
+		mNode->translate(Vector3(0, 0, 1) * speed, Ogre::Node::TS_LOCAL);
+		isRot = true;
+		break;
 	}
-
 	return false;
+	
 }
 
 void Nave::frameRendered(const Ogre::FrameEvent& evt)
 {
 		for (auto aspa : aspas)
 			aspa->setRot(isRot);
+
+		isRot = false;
 }
 
 void Nave::receiveEvent(MessageType msgType, EntidadIG* ent)

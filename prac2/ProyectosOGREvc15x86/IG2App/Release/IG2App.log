@@ -5,10 +5,14 @@ F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(34,27): warnin
 F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(42,27): warning C4305: 'argument': truncation from 'double' to 'Ogre::Real'
 F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(48,32): warning C4305: 'argument': truncation from 'double' to 'Ogre::Real'
 F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(54,32): warning C4305: 'argument': truncation from 'double' to 'Ogre::Real'
+F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(71,40): warning C4244: 'argument': conversion from 'int' to 'const Ogre::Real', possible loss of data
+F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(75,26): warning C4244: 'argument': conversion from 'int' to 'Ogre::Real', possible loss of data
+F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(79,27): warning C4244: 'argument': conversion from 'int' to 'Ogre::Real', possible loss of data
+F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\IG2App\Nave.cpp(83,39): warning C4244: 'argument': conversion from 'int' to 'const Ogre::Real', possible loss of data
   Generating code
-  1 of 828 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  2 of 829 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 SDL2main.lib(SDL_windows_main.obj) : warning LNK4099: PDB 'SDL2main.pdb' was not found with 'SDL2main.lib(SDL_windows_main.obj)' or at 'F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\bin\SDL2main.pdb'; linking object as if no debug info
   IG2App.vcxproj -> F:\Docs\0Uni\ig2_22-23\prac2\ProyectosOGREvc15x86\bin\IG2AppRelease.exe
