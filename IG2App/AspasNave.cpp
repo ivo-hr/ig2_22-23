@@ -24,14 +24,14 @@ AspasNave::AspasNave(SceneNode* node, int n) : EntidadIG(node)
 	}
 }
 
-void AspasNave::moveCylinders() 
+void AspasNave::moveCylinders(int angle) 
 {
 	for (auto e : blades) 
-		e->getCylinder()->roll(Degree(-1));
+		e->getCylinder()->roll(Degree(-angle));
 }
 
-void AspasNave::rotateCylinders() 
+void AspasNave::rotateCylinders(int angle) 
 {
 	for (auto e : blades)
-		e->getCylinder()->yaw(Degree(1));
+		e->getCylinder()->yaw(Degree(angle));
 }

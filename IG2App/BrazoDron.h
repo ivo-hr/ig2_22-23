@@ -18,9 +18,6 @@ public:
 
 	SceneNode* getArm() { return mBrazoDronNode; };
 
-	void moveCylinders();
-	void rotateCylinders();
-
 protected:
 	SceneNode* mNode;
 	SceneManager* mSM;

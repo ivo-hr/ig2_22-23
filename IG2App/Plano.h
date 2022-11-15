@@ -7,6 +7,7 @@
 #include <OgreMeshManager.h>
 #include <OgreInput.h>
 #include <SDL_keycode.h>
+#include <OgreTimer.h>
 
 #include "EntidadIG.h"
 
@@ -21,7 +22,13 @@ public:
 protected:
 	Entity* ent = nullptr;
 	bool isMoving = true;
+	bool isWater = true;
+	bool isActive = true;
+
+	Timer* myTimer = new Timer();
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const FrameEvent& evt);
+	virtual void receiveEvent(MessageType msgType, EntidadIG* entidad);
 };
 

@@ -20,7 +20,7 @@ Noria::Noria(SceneNode* node, int n) : EntidadIG(node)
 
 	mNoriaNode = mNode->createChildSceneNode();
 	ent = mSM->createEntity("Barrel.mesh");
-	ent->setMaterialName("Practica1/roller");
+	ent->setMaterialName("Practica1/stones");
 	mNoriaNode->attachObject(ent);
 
 	//mNoriaNode->setInheritOrientation(false);
@@ -57,7 +57,8 @@ void Noria::receiveEvent(MessageType msgType, EntidadIG* entidad)
 	switch (msgType)
 	{
 	case msgNoria:
-		isMoving = !isMoving; break;
+		isMoving = !isMoving; 
+		break;
 	default:
 		break;
 	}

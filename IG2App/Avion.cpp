@@ -40,30 +40,53 @@ Avion::Avion(SceneNode* node) : EntidadIG(node)
 	ent->setMaterialName("Practica1/yellow");
 	mAvionNode->attachObject(ent);
 	mAvionNode->yaw(Degree(-90));
+
+	// Sistema de particulas
+	ParticleSystem* pSys = mSM->createParticleSystem("psSmoke", "Practica1/smoke");
+	pSys->setEmitting(true);
+	mPSNode = mAvionNode->createChildSceneNode();
+	mPSNode->attachObject(pSys);
+
+	/*RibbonTrail* ribbonTrail = mSM->createRibbonTrail();
+	ribbonTrail->setTrailLength(100);
+	ribbonTrail->setMaterialName("Practica1/ribbon");
+	mAvionNode->attachObject(ribbonTrail);*/
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) 
 {
 	if (evt.keysym.sym == SDLK_h) 
 	{
-		mNode->getParentSceneNode()->roll(Degree(-1));
+		//mNode->getParentSceneNode()->roll(Degree(-angle));
+		mNode->yaw(Degree(-angle));
 
 		for (auto e : blades) 
 		{
-			e->getBlade()->yaw(Degree(5));
-			e->moveCylinders();
+			e->getBlade()->yaw(Degree(angle));
+			e->moveCylinders(angle);
 		}
 
 	}
 	else if (evt.keysym.sym == SDLK_j) 
 	{
-		mNode->getParentSceneNode()->yaw(Degree(1));
+		//mNode->getParentSceneNode()->yaw(Degree(angle));
+		mNode->getParentSceneNode()->roll(Degree(-angle), Node::TS_PARENT);
 
-		for (auto e : blades)
+		for (auto e : blades) 
 		{
-			e->rotateCylinders();
+			e->getBlade()->yaw(Degree(angle));
+			e->rotateCylinders(angle);
 		}
 	}
 
 	return true;
+}
+
+void Avion::frameRendered(const FrameEvent& evt) 
+{
+	//mNode->yaw(Degree(-1));
+	mNode->getParentSceneNode()->yaw(Degree(1));
+
+	for (auto e : blades)
+		e->getBlade()->yaw(Degree(angle));
 }

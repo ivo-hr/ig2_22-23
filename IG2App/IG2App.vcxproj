@@ -123,6 +123,7 @@
     <ClInclude Include="AspaNoria.h" />
     <ClInclude Include="AspasNave.h" />
     <ClInclude Include="Avion.h" />
+    <ClInclude Include="Bomba.h" />
     <ClInclude Include="BrazoDron.h" />
     <ClInclude Include="Dron.h" />
     <ClInclude Include="EntidadIG.h" />
@@ -131,12 +132,14 @@
     <ClInclude Include="Muñeco.h" />
     <ClInclude Include="Noria.h" />
     <ClInclude Include="Plano.h" />
+    <ClInclude Include="Sinbad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aspa.cpp" />
     <ClCompile Include="AspaNoria.cpp" />
     <ClCompile Include="AspasNave.cpp" />
     <ClCompile Include="Avion.cpp" />
+    <ClCompile Include="Bomba.cpp" />
     <ClCompile Include="BrazoDron.cpp" />
     <ClCompile Include="Dron.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />
@@ -146,6 +149,7 @@
     <ClCompile Include="Noria.cpp" />
     <ClCompile Include="EntidadIG.cpp" />
     <ClCompile Include="Plano.cpp" />
+    <ClCompile Include="Sinbad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

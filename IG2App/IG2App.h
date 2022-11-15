@@ -6,12 +6,16 @@
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include <OgreBillboard.h>
+#include <OgreBillboardSet.h>
 
 #include "Plano.h"
 #include "Noria.h"
 #include "Muñeco.h"
 #include "Avion.h"
 #include "Dron.h"
+#include "Sinbad.h"
+#include "Bomba.h"
 
 using namespace Ogre;
 
@@ -32,7 +36,6 @@ protected:
   OgreBites::TrayManager* mTrayMgr = nullptr;    
   SceneNode* mLightNode = nullptr;
   SceneNode* mCamNode = nullptr;
-  SceneNode* mSinbadNode = nullptr;
 
   /// <summary>
   /// Reloj
@@ -42,6 +45,8 @@ protected:
   SceneNode* mSphereNode = nullptr;
   SceneNode* mClockHandNode = nullptr;
   Entity* ent = nullptr;
+
+  int nDron, nDronAlive = 400;
 
   /// <summary>
   /// Plano
@@ -82,6 +87,21 @@ protected:
   /// Nodo ficticio
   /// </summary>
   SceneNode* mFictitiusNode = nullptr;
+
+  /// <summary>
+  /// Sinbad
+  /// </summary>
+  Sinbad* sinbad;
+  SceneNode* mSinbadNode = nullptr;
+
+  /// <summary>
+  /// Bomba
+  /// </summary>
+  Bomba* bomba;
+  SceneNode* mBombaNode = nullptr;
+
+  SceneNode* mPlaneRed = nullptr;
+  SceneNode* mPlaneYellow = nullptr;
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  

@@ -21,10 +21,13 @@ protected:
 	SceneManager* mSM;
 
 	SceneNode* mAvionNode = nullptr;
-	SceneNode* mFictitiusNode = nullptr;
 	Entity* ent = nullptr;
 
+	int angle = 10;
 	std::vector<AspasNave*> blades;
 
+	SceneNode* mPSNode = nullptr;
+
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const FrameEvent& evt);
 };

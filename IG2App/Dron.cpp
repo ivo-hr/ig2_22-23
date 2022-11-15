@@ -38,14 +38,10 @@ Dron::Dron(SceneNode* node, int n, TYPE type) : EntidadIG(node)
 void Dron::frameRendered(const FrameEvent& evt) 
 {
 	for (auto e : arms) 
-	{
-		e->getArm()->pitch(Degree(-1));
-	}
+		e->getArm()->pitch(Degree(-10));
 
 	if (isMoving)
 	{
-		for(auto e : arms)	e->moveCylinders();
-
 		mNode->getParentSceneNode()->pitch(Degree(-1));
 
 		if (myTimer->getMilliseconds() > 2000)
@@ -58,11 +54,9 @@ void Dron::frameRendered(const FrameEvent& evt)
 	}
 	else 
 	{
-		for(auto e : arms) 	e->rotateCylinders();
-
 		mNode->getParentSceneNode()->yaw(Degree(2 * dir - 1));
 
-		if (myTimer->getMilliseconds() > Math::RangeRandom(10000, 20000)) 
+		if (myTimer->getMilliseconds() > Math::RangeRandom(1000, 2000)) 
 		{
 			isMoving = !isMoving;
 			myTimer->reset();

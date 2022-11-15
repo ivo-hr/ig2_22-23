@@ -25,15 +25,3 @@ BrazoDron::BrazoDron(SceneNode* node) : EntidadIG(node)
 	mBrazoDronNode->translate(50, 250, 0);
 	blades.push_back(new AspasNave(mBrazoDronNode, 3));
 }
-
-void BrazoDron::moveCylinders() 
-{
-	for (auto e : blades)
-		e->moveCylinders();
-}
-
-void BrazoDron::rotateCylinders() 
-{
-	for (auto e : blades)
-		e->rotateCylinders();
-}

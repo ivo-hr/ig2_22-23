@@ -18,8 +18,8 @@ public:
 
 	SceneNode* getBlade() { return mAspaNaveNode; };
 
-	void moveCylinders();
-	void rotateCylinders();
+	void moveCylinders(int angle);
+	void rotateCylinders(int angle);
 
 protected:
 	SceneNode* mNode;

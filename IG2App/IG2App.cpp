@@ -9,23 +9,47 @@ using namespace Ogre;
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-  if (evt.keysym.sym == SDLK_ESCAPE)
-  {
-    getRoot()->queueEndRendering();
-  }
-  /*else if (evt.keysym.sym == SDLK_g) 
-  {
-	  mClockNode->roll(Degree(1));
-  }
-  else if (evt.keysym.sym == SDLK_h) 
-  {
-	  mHoursNode->yaw(Degree(1));
-  }*/
-  else if (evt.keysym.sym == SDLK_p) 
-  {
-	  mPlaneNode->yaw(Degree(1));
-	  noria->moveBlades();
-  }
+	if (evt.keysym.sym == SDLK_ESCAPE)
+	{
+		getRoot()->queueEndRendering();
+	}
+	/*else if (evt.keysym.sym == SDLK_g)
+	{
+		mClockNode->roll(Degree(1));
+	}
+	else if (evt.keysym.sym == SDLK_h)
+	{
+		mHoursNode->yaw(Degree(1));
+	}*/
+	/*else if (evt.keysym.sym == SDLK_p)
+	{
+		mPlaneNode->yaw(Degree(1));
+		noria->moveBlades();
+	}*/
+	/*else if (evt.keysym.sym == SDLK_h)
+	{
+		AxisAlignedBox aab = mAvionNode->_getWorldAABB();
+
+		for (int i = 0; i < nDron; i++)
+		{
+			auto mDronAvispa = mSM->getSceneNode("mDronAvispa" + std::to_string(i));
+			AxisAlignedBox aab2 = mDronAvispa->_getWorldAABB();
+
+			if (aab.intersects(aab2))
+			{
+				mDronAvispa->setVisible(false);
+
+				nDronAlive--;
+				if (nDronAlive <= 0)
+					dron->changeColor();
+			}
+		}
+	}*/
+	/*else if (evt.keysym.sym == SDLK_0) sinbad->arma(true);
+	else if (evt.keysym.sym == SDLK_1) sinbad->arma(false);
+	else if (evt.keysym.sym == SDLK_2) sinbad->arma();
+	else if (evt.keysym.sym == SDLK_3) sinbad->cambiaArma();*/
+	/*else if (evt.keysym.sym == SDLK_c) sinbad->changeAnimation();*/
   
   return true;
 }
@@ -87,7 +111,7 @@ void IG2App::setupScene(void)
   /// Color de fondo de la escena
   /// </summary>
   /// <param name=""></param>
-  vp->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 0.0)); // 0.7 0.8 0.9
+  vp->setBackgroundColour(Ogre::ColourValue(0.6, 0.7, 0.8)); // 0.7 0.8 0.9
 
   //------------------------------------------------------------------------
 
@@ -182,72 +206,117 @@ void IG2App::setupScene(void)
   AspaNoria* aspaNoria = new AspaNoria(mAspaNoriaNode);*/
 
   /// <summary>
-  /// Creacion del plano
+  /// Creacion del plano de agua
   /// </summary>
   /// <param name=""></param>
-  /*mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("mPlane");
+  mPlaneNode = mSM->getRootSceneNode()->createChildSceneNode("mPlane");
   plano = new Plano(mPlaneNode);
-  addInputListener(plano);*/
+  addInputListener(plano);
+
+  mFictitiusNode = mPlaneNode->createChildSceneNode();
+
+  /// <summary>
+  /// Creacion de los planos de colores
+  /// </summary>
+  /// <param name=""></param>
+  MeshManager::getSingleton().createPlane("mPlane1000x1000",
+	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  Plane(Vector3::UNIT_Y, 0),
+	  1000, 1000, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+
+  mPlaneRed = mPlaneNode->createChildSceneNode("mPlaneRed");
+  ent = mSM->createEntity("mPlane1000x1000");
+  ent->setMaterialName("Practica1/red");
+  mPlaneRed->attachObject(ent);
+  mPlaneRed->translate(-1000, 5, -1000);
+
+  mPlaneYellow = mPlaneNode->createChildSceneNode("mPlaneYellow");
+  ent = mSM->createEntity("mPlane1000x1000");
+  ent->setMaterialName("Practica1/yellow");
+  mPlaneYellow->attachObject(ent);
+  mPlaneYellow->translate(1000, 5, 1000);
 
   /// <summary>
   /// Creacion de la noria
   /// </summary>
   /// <param name=""></param>
-  /*mNoriaNode = mPlaneNode->createChildSceneNode("mNoria");
+  mNoriaNode = mPlaneRed->createChildSceneNode("mNoria");
+  mNoriaNode->translate(-400, 0, 0);
   noria = new Noria(mNoriaNode, 30);
-  addInputListener(noria);*/
+  addInputListener(noria);
 
   /// <summary>
   /// Creacion del muñeco
   /// </summary>
   /// <param name=""></param>
-  /*mMuñecoNode = mPlaneNode->createChildSceneNode("mMuñeco");
-  mMuñecoNode->setPosition(1000, 200, -1000);
-  mMuñecoNode->setScale(2, 2, 2);
+  mMuñecoNode = mPlaneRed->createChildSceneNode("mMuñeco");
+  mMuñecoNode->translate(300, 100, -300);
+  //mMuñecoNode->setScale(2, 2, 2);
   //mMuñecoNode->yaw(Radian(-3 * Math::PI / 4));
-  mMuñecoNode->yaw(Degree(-90));
+  //mMuñecoNode->yaw(Degree(-90));
   muñeco = new Muñeco(mMuñecoNode);
-  addInputListener(muñeco);*/
+  addInputListener(muñeco);
 
   /// <summary>
   /// Creacion del planeta
   /// </summary>
   /// <param name=""></param>
-  mPlanetNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanet");
+  /*mPlanetNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanet");
   ent = mSM->createEntity("sphere.mesh");
   ent->setMaterialName("Practica1/cyan");
   mPlanetNode->scale(3, 3, 3);
   mPlanetNode->attachObject(ent);
 
-  mFictitiusNode = mPlanetNode->createChildSceneNode();
+  mFictitiusNode = mPlanetNode->createChildSceneNode();*/
+
+  /// <summary>
+  /// Creacion de la bomba
+  /// </summary>
+  /// <param name=""></param>
+  mBombaNode = mPlaneNode->createChildSceneNode("mBomba");
+  mBombaNode->scale(70, 70, 70);
+  bomba = new Bomba(mBombaNode);
+  addInputListener(bomba);
 
   /// <summary>
   /// Creacion del avion caza drones
   /// </summary>
   /// <param name=""></param>
+  mFictitiusNode = mBombaNode->createChildSceneNode();
   mAvionNode = mFictitiusNode->createChildSceneNode("mAvion");
   avion = new Avion(mAvionNode);
-  mAvionNode->scale(.06, .06, .06);
-  mAvionNode->setPosition(0, 105, 0);
+  mAvionNode->scale(.02, .02, .02);
+  mAvionNode->translate(0, 20, 20);
   addInputListener(avion);
 
   /// <summary>
-  /// Creacion del dron nodriza
+  /// BillboardSet
   /// </summary>
   /// <param name=""></param>
-  mFictitiusNode = mPlanetNode->createChildSceneNode();
-  mDronNode = mFictitiusNode->createChildSceneNode("mDronNodriza");
-  dron = new Dron(mDronNode, 3, Dron::TYPE::MOTHERSHIP);
-  mDronNode->scale(.03, .03, .03);
-  mDronNode->setPosition(0, 105, 0);
-  mFictitiusNode->roll(Degree(-45));
-  addInputListener(dron);
+  BillboardSet* bbSet = mSM->createBillboardSet("billboardSet", 1);
+  bbSet->setDefaultDimensions(100, 50);
+  bbSet->setMaterialName("Practica1/panel");
+  mAvionNode->attachObject(bbSet);
+
+  /// <summary>
+  /// Billboard
+  /// </summary>
+  /// <param name=""></param>
+  Billboard* bb = bbSet->createBillboard(Vector3(-150.0, 100.0, 0.0));
+
+  BillboardSet* bbSet2 = mSM->createBillboardSet("billboardSet2", 10);
+  bbSet2->setDefaultDimensions(1000, 1000);
+  bbSet2->setMaterialName("Practica1/smoke");
+  mPlaneNode->attachObject(bbSet2);
+  Billboard* bb2 = bbSet2->createBillboard(Vector3(0.0, 500.0, -500.0));
 
   /// <summary>
   /// Creacion del dron avispa
   /// </summary>
   /// <param name=""></param>
-  for (int i = 0; i < 400; i++) 
+  /*nDron = nDronAlive;
+
+  for (int i = 0; i < nDron; i++) 
   {
 	  mFictitiusNode = mPlanetNode->createChildSceneNode();
 	  mDronNode = mFictitiusNode->createChildSceneNode("mDronAvispa" + std::to_string(i));
@@ -258,7 +327,32 @@ void IG2App::setupScene(void)
 	  mFictitiusNode->pitch(Degree(Math::RangeRandom(0, 360)));
 	  mFictitiusNode->yaw(Degree(Math::RangeRandom(0, 360)));
 	  addInputListener(dron);
-  }
+  }*/
+
+  /// <summary>
+  /// Creacion del dron nodriza
+  /// </summary>
+  /// <param name=""></param>
+  /*mFictitiusNode = mPlanetNode->createChildSceneNode();
+  mDronNode = mFictitiusNode->createChildSceneNode("mDronNodriza");
+  dron = new Dron(mDronNode, 3, Dron::TYPE::MOTHERSHIP);
+  mDronNode->scale(.03, .03, .03);
+  mDronNode->setPosition(0, 105, 0);
+  mFictitiusNode->roll(Degree(-45));
+  addInputListener(dron);*/
+
+  /// <summary>
+  /// Creacion de Sinbad
+  /// </summary>
+  /// <param name=""></param>
+  mFictitiusNode = mPlaneYellow->createChildSceneNode();
+  mSinbadNode = mFictitiusNode->createChildSceneNode("mSinbad");
+  mSinbadNode->translate(0, 270, 0);
+  mSinbadNode->scale(50, 50, 50);
+  mSinbadNode->yaw(Degree(90));
+  sinbad = new Sinbad(mSinbadNode);
+  sinbad->arma();
+  addInputListener(sinbad);
 
   //------------------------------------------------------------------------
 

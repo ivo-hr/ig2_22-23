@@ -4,6 +4,12 @@
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
+#include <OgreKeyFrame.h>
+#include <OgreAnimation.h>
+#include <OgreBillboardSet.h>
+#include <OgreParticleSystem.h>
+#include <OgreRibbonTrail.h>
+
 #include "IG2ApplicationContext.h"
 
 using namespace Ogre;
@@ -21,7 +27,7 @@ public:
 	static void addListener(EntidadIG* entidad) { appListeners.push_back(entidad); };
 
 	// Tipos de mensaje
-	enum MessageType { msgNoria, msgMuñeco };
+	enum MessageType { msgNoria, msgMuñeco, msgBomba, msgPlano };
 
 protected:
 	SceneNode* mNode;
