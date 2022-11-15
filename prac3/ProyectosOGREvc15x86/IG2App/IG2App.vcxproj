@@ -123,6 +123,7 @@
     <ClInclude Include="AspaNoria.h" />
     <ClInclude Include="AspasNave.h" />
     <ClInclude Include="Avion.h" />
+    <ClInclude Include="Bomba.h" />
     <ClInclude Include="BrazoDron.h" />
     <ClInclude Include="Dron.h" />
     <ClInclude Include="EntidadIG.h" />
@@ -138,6 +139,7 @@
     <ClCompile Include="AspaNoria.cpp" />
     <ClCompile Include="AspasNave.cpp" />
     <ClCompile Include="Avion.cpp" />
+    <ClCompile Include="Bomba.cpp" />
     <ClCompile Include="BrazoDron.cpp" />
     <ClCompile Include="Dron.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />

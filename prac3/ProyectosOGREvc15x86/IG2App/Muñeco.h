@@ -21,6 +21,7 @@ protected:
 	bool isMoving = false;
 	bool isRed = false;
 
+	SceneNode* mMuñecoNode = nullptr;
 	SceneNode* mMuñecoHeadNode = nullptr;
 	SceneNode* mMuñecoBodyNode = nullptr;
 	//SceneNode* mMuñecoNoseNode = nullptr;
@@ -29,8 +30,12 @@ protected:
 	Entity* head = nullptr;
 	Entity* body = nullptr;
 
+	AnimationState* animationState = nullptr;
+	float duration = 20.0;
+	float distance = 600.0;
+
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
-	//virtual void frameRendered(const FrameEvent& evt);
+	virtual void frameRendered(const FrameEvent& evt);
 	virtual void receiveEvent(MessageType msgType, EntidadIG* entidad);
 };
 

@@ -53,6 +53,17 @@ material Practica1/cyan
     }
 }
 
+material Practica1/amber
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.75 0.0 1.0
+        }
+    }
+}
+
 material Practica1/head
 {
     technique
@@ -149,8 +160,8 @@ material Practica1/water
             {
                 texture Water02.jpg
                 colour_op add
-                scroll_anim 0.0 -0.1
-                rotate 90.0
+                scroll_anim -0.1 0.1
+                rotate -135.0
             }
         }
     }
@@ -205,13 +216,13 @@ material Practica1/droneArm
     }
 }
 
-material Practica1/roller
+material Practica1/stones
 {
     technique
     {
         pass
         {
-            diffuse 1.0 1.0 1.0 1.0
+            diffuse 0.5 0.5 0.5 1.0
             texture_unit
             {
                 texture BeachStones.jpg
@@ -233,6 +244,62 @@ material Practica1/dirt
                 texture dirt01.jpg
                 colour_op modulate
             }
-        }
-    }
+        }
+    }
+}
+
+material Practica1/panel
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            texture_unit
+            {
+                texture 10points.png
+                text_address_mode clamp
+            }
+        }
+    }
+}
+
+material Practica1/smoke
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+            diffuse vertexcolour
+
+            texture_unit
+            {
+                texture smoke.png
+                text_address_mode clamp
+            }
+        }
+    }
+}
+
+material Practica1/ribbon
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+            diffuse vertexcolour
+
+            texture_unit
+            {
+                texture ribbonband.png
+                text_address_mode clamp
+            }
+        }
+    }
 }

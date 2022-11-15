@@ -4,7 +4,9 @@
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
+#include <OgreTimer.h>
 
+#include "AspasNave.h"
 #include "EntidadIG.h"
 
 using namespace Ogre;
@@ -12,35 +14,46 @@ using namespace Ogre;
 class Sinbad : public EntidadIG
 {
 public:
-	Sinbad(SceneNode* node, int speed);
+	Sinbad(SceneNode* node);
 	~Sinbad() {};
 
+	void arma(bool hand);
+	void cambiaArma();
+	void arma();
 
+	void changeAnimation();
 
 protected:
 	SceneNode* mNode;
 	SceneManager* mSM;
 
-	Entity* what;
-	int vel = 5;
 	SceneNode* mSinbadNode = nullptr;
-	SceneNode* mFictitiusNode = nullptr;
 	Entity* ent = nullptr;
-	std::vector <Entity*> swords;
-	float oldYaw = 0;
 
-	AnimationState* topAnim;
-	AnimationState* botAnim;
+	AnimationState* runBase = nullptr;
+	AnimationState* runTop = nullptr;
+	AnimationState* dance = nullptr;
+	AnimationState* idleTop = nullptr;
+	AnimationState* idleBase = nullptr;
+	AnimationStateSet* aux = nullptr;
 
-	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	Timer* myTimer = new Timer();
+
+	Entity* sword = nullptr;
+	bool leftSword = false;
+	bool rightSword = false;
+
+	AnimationState* animationState = nullptr;
+	float duration = 20.0;
+	float distance = 40.0;
+
 	virtual void frameRendered(const FrameEvent& evt);
+	virtual void receiveEvent(MessageType msgType, EntidadIG* entidad);
 
-	void SinbadAnim();
-	void arma(bool izqDer);
-	int weapon = 0;
-	void arma();
-	void cambiaEspada();
-	void swordEraser();
+	void runAnimation();
+	void danceAnimation();
 	
-
+	void die();
+	bool dead = false;
+	float timeDead = 5;
 };

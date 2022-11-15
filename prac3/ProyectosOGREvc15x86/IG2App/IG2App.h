@@ -6,6 +6,8 @@
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include <OgreBillboard.h>
+#include <OgreBillboardSet.h>
 
 #include "Plano.h"
 #include "Noria.h"
@@ -13,6 +15,7 @@
 #include "Avion.h"
 #include "Dron.h"
 #include "Sinbad.h"
+#include "Bomba.h"
 
 using namespace Ogre;
 
@@ -33,7 +36,6 @@ protected:
   OgreBites::TrayManager* mTrayMgr = nullptr;    
   SceneNode* mLightNode = nullptr;
   SceneNode* mCamNode = nullptr;
-  //SceneNode* mSinbadNode = nullptr;
 
   /// <summary>
   /// Reloj
@@ -43,6 +45,8 @@ protected:
   SceneNode* mSphereNode = nullptr;
   SceneNode* mClockHandNode = nullptr;
   Entity* ent = nullptr;
+
+  int nDron, nDronAlive = 400;
 
   /// <summary>
   /// Plano
@@ -73,9 +77,6 @@ protected:
   /// </summary>
   Dron* dron;
   SceneNode* mDronNode = nullptr;
-  std::vector <SceneNode*> avispas;
-  int vivas = 400;
-
 
   /// <summary>
   /// Planeta
@@ -83,15 +84,24 @@ protected:
   SceneNode* mPlanetNode = nullptr;
 
   /// <summary>
-/// Sinbad
-/// </summary>
+  /// Nodo ficticio
+  /// </summary>
+  SceneNode* mFictitiusNode = nullptr;
+
+  /// <summary>
+  /// Sinbad
+  /// </summary>
   Sinbad* sinbad;
   SceneNode* mSinbadNode = nullptr;
 
   /// <summary>
-  /// Nodo ficticio
+  /// Bomba
   /// </summary>
-  SceneNode* mFictitiusNode = nullptr;
+  Bomba* bomba;
+  SceneNode* mBombaNode = nullptr;
+
+  SceneNode* mPlaneRed = nullptr;
+  SceneNode* mPlaneYellow = nullptr;
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  

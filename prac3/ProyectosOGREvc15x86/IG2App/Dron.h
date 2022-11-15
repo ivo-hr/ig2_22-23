@@ -19,6 +19,8 @@ public:
 	Dron(SceneNode* node, int n, TYPE type);
 	~Dron() {};
 
+	void changeColor() { ent->setMaterialName("Practica1/yellow"); };
+
 protected:
 	SceneNode* mNode;
 	SceneManager* mSM;
