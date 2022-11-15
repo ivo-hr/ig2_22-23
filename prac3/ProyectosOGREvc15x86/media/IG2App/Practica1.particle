@@ -56,17 +56,18 @@ particle_system Practica1/fallen
 { // p.s. attributes
     renderer billboard 
     billboard_type point // indica como se orientan los billboards
-    particle_width 50
-    particle_height 50
-    quota 1000 // maximo numero de particulas mostradas a la vez
+    particle_width 1000
+    particle_height 1000
+    quota 1 // maximo numero de particulas mostradas a la vez
     material Practica1/smoke
 
     emitter Point
     { // e.attributes
         direction 0 1 0
         angle 35
-        emission_rate 150
-        time_to_live 6
+
+        emission_rate 1000
+        time_to_live 10
         velocity_min 50
         velocity_max 80
         colour 0.01 0.01 0.01 1

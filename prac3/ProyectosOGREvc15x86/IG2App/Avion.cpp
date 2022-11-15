@@ -15,36 +15,36 @@ Avion::Avion(SceneNode* node) : EntidadIG(node)
 
 	for (int i = 0; i < 2; i++)
 	{
-		mAvionNode = mNode->createChildSceneNode();
+		SceneNode* ala = mAvionNode->createChildSceneNode();
 		ent = mSM->createEntity("cube.mesh");
 		ent->setMaterialName("Practica1/chess");
-		mAvionNode->attachObject(ent);
-		mAvionNode->translate(0, 50, -150 + 300 * i);
-		mAvionNode->setScale(1, .15, 2);
+		ala->attachObject(ent);
+		ala->translate(0, 0, -150 + 300 * i);
+		ala->setScale(1, .15, 2);
 
-		mAvionNode = mNode->createChildSceneNode();
-		mAvionNode->translate(50, 50, -150 + 300 * i);
-		blades.push_back(new AspasNave(mAvionNode, 5));
+		SceneNode* aspa = mAvionNode->createChildSceneNode();
+		aspa->translate(50, 0, -150 + 300 * i);
+		blades.push_back(new AspasNave(aspa, 5));
 	}
 
-	mAvionNode = mNode->createChildSceneNode();
+	SceneNode* nariz = mAvionNode->createChildSceneNode();
 	ent = mSM->createEntity("Barrel.mesh");
 	ent->setMaterialName("Practica1/orange");
-	mAvionNode->attachObject(ent);
-	mAvionNode->translate(100, 50, 0);
-	mAvionNode->setScale(10.5, 3, 10.5);
-	mAvionNode->roll(Degree(90));
+	nariz->attachObject(ent);
+	nariz->translate(100, 0, 0);
+	nariz->setScale(10.5, 3, 10.5);
+	nariz->roll(Degree(90));
 
-	mAvionNode = mNode->createChildSceneNode();
+	SceneNode* ninja = mAvionNode->createChildSceneNode();
 	ent = mSM->createEntity("ninja.mesh");
 	ent->setMaterialName("Practica1/yellow");
-	mAvionNode->attachObject(ent);
-	mAvionNode->yaw(Degree(-90));
+	ninja->attachObject(ent);
+	ninja->yaw(Degree(-90));
 
 	// Sistema de particulas
 	pSys = mSM->createParticleSystem("psSmoke", "Practica1/smoke");
 	pSys->setEmitting(true);
-	mPSNode = mAvionNode->createChildSceneNode();
+	mPSNode = mNode->createChildSceneNode();
 	mPSNode->attachObject(pSys);
 
 	/*RibbonTrail* ribbonTrail = mSM->createRibbonTrail();
@@ -86,10 +86,12 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 		pSys->setEmitting(false);
 
 		ParticleSystem* pSys2 = mSM->createParticleSystem("psFallen", "Practica1/fallen");
-		pSys->setEmitting(true);
+		pSys2->setEmitting(true);
 		mPSNode->attachObject(pSys2);
-
+		
 		boom = true;
+			
+		mAvionNode->setVisible(false);
 
 		sendEvent(msgAvionBoom, this);
 	}
@@ -99,9 +101,14 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 void Avion::frameRendered(const FrameEvent& evt) 
 {
-	//mNode->yaw(Degree(-1));
-	mNode->getParentSceneNode()->yaw(Degree(1));
+	if (!boom){
+			mNode->getParentSceneNode()->yaw(Degree(1));
 
-	for (auto e : blades)
-		e->getBlade()->yaw(Degree(angle));
+			for (auto e : blades)
+				e->getBlade()->yaw(Degree(angle));
+	}
+	
+	
+	//mNode->yaw(Degree(-1));
+
 }

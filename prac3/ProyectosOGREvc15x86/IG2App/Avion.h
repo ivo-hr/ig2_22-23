@@ -17,9 +17,10 @@ public:
 	~Avion() {};
 
 protected:
+	SceneNode* nNode;
 	SceneNode* mNode;
 	SceneManager* mSM;
-
+	SceneManager* pSM;
 	SceneNode* mAvionNode = nullptr;
 	Entity* ent = nullptr;
 	ParticleSystem* pSys;

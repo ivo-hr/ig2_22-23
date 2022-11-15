@@ -77,8 +77,9 @@ void Bomba::receiveEvent(MessageType msgType, EntidadIG* entidad)
 	case msgBombaBoom:
 		pSys = mSM->createParticleSystem("psBomb", "Practica1/bomb");
 		pSys->setEmitting(true);
-		mPSNode = mBombaNode->createChildSceneNode();
+		mPSNode = mNode->createChildSceneNode();
 		mPSNode->attachObject(pSys);
+		mBombaNode->setVisible(false);
 		break;
 
 	default: 
