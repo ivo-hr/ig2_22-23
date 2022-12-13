@@ -9,6 +9,7 @@
 #include <OgreBillboardSet.h>
 #include <OgreParticleSystem.h>
 #include <OgreRibbonTrail.h>
+#include <OgreTimer.h>
 
 #include "IG2ApplicationContext.h"
 
@@ -27,7 +28,7 @@ public:
 	static void addListener(EntidadIG* entidad) { appListeners.push_back(entidad); };
 
 	// Tipos de mensaje
-	enum MessageType { msgNoria, msgMuñeco, msgBomba, msgPlano };
+	enum MessageType { msgNoria, msgMuñeco, msgBomba, msgPlano, msgMuerte, msgExplosion };
 
 protected:
 	SceneNode* mNode;

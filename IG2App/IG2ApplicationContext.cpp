@@ -85,7 +85,7 @@ namespace OgreBites {
 
 
 		/// Mostrar caja de diálogo para la configuración
-		//mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+		mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 	}
 
 	void IG2ApplicationContext::shutdown()

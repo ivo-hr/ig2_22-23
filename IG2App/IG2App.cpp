@@ -59,7 +59,7 @@ void IG2App::shutdown()
   mShaderGenerator->removeSceneManager(mSM);  
   mSM->removeRenderQueueListener(mOverlaySystem);  
 					
-  mRoot->destroySceneManager(mSM);  
+  mRoot->destroySceneManager(mSM);
 
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
@@ -102,7 +102,7 @@ void IG2App::setupScene(void)
 
   mCamNode->setPosition(0, 0, 1000);
   mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
-  //mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
+  mCamNode->setDirection(Ogre::Vector3(-1, 0, 0));  
   
   // and tell it to render into the main window
   Viewport* vp = getRenderWindow()->addViewport(cam);
@@ -125,7 +125,8 @@ void IG2App::setupScene(void)
   //mLightNode = mCamNode->createChildSceneNode("nLuz");
   mLightNode->attachObject(luz);
 
-  mLightNode->setDirection(Ogre::Vector3(-1, -1, 0));  //vec3.normalise();
+  mLightNode->setDirection(Ogre::Vector3(0, -1, -1));
+  //mLightNode->setDirection(Ogre::Vector3(-1, -1, 0));  //vec3.normalise();
   //lightNode->setPosition(0, 0, 1000);
  
   //------------------------------------------------------------------------
@@ -206,6 +207,12 @@ void IG2App::setupScene(void)
   AspaNoria* aspaNoria = new AspaNoria(mAspaNoriaNode);*/
 
   /// <summary>
+  /// Creacion del skyPlane
+  /// </summary>
+  /// <param name=""></param>
+  mSM->setSkyPlane(true, Plane(Vector3::UNIT_X, -80), "Practica2GLSL/newSpace", 1, 1, true, 1.0, 100, 100);
+
+  /// <summary>
   /// Creacion del plano de agua
   /// </summary>
   /// <param name=""></param>
@@ -224,11 +231,11 @@ void IG2App::setupScene(void)
 	  Plane(Vector3::UNIT_Y, 0),
 	  1000, 1000, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
-  mPlaneRed = mPlaneNode->createChildSceneNode("mPlaneRed");
+  /*mPlaneRed = mPlaneNode->createChildSceneNode("mPlaneRed");
   ent = mSM->createEntity("mPlane1000x1000");
   ent->setMaterialName("Practica1/red");
   mPlaneRed->attachObject(ent);
-  mPlaneRed->translate(-1000, 5, -1000);
+  mPlaneRed->translate(-1000, 5, -1000);*/
 
   mPlaneYellow = mPlaneNode->createChildSceneNode("mPlaneYellow");
   ent = mSM->createEntity("mPlane1000x1000");
@@ -240,8 +247,8 @@ void IG2App::setupScene(void)
   /// Creacion de la noria
   /// </summary>
   /// <param name=""></param>
-  mNoriaNode = mPlaneRed->createChildSceneNode("mNoria");
-  mNoriaNode->translate(-400, 0, 0);
+  mNoriaNode = mPlaneNode->createChildSceneNode("mNoria");
+  mNoriaNode->translate(-1400, 0, -1000);
   noria = new Noria(mNoriaNode, 30);
   addInputListener(noria);
 
@@ -249,13 +256,43 @@ void IG2App::setupScene(void)
   /// Creacion del muñeco
   /// </summary>
   /// <param name=""></param>
-  mMuñecoNode = mPlaneRed->createChildSceneNode("mMuñeco");
-  mMuñecoNode->translate(300, 100, -300);
+  mMuñecoNode = mPlaneNode->createChildSceneNode("mMuñeco");
+  mMuñecoNode->translate(-700, 100, -1300);
   //mMuñecoNode->setScale(2, 2, 2);
   //mMuñecoNode->yaw(Radian(-3 * Math::PI / 4));
   //mMuñecoNode->yaw(Degree(-90));
   muñeco = new Muñeco(mMuñecoNode);
   addInputListener(muñeco);
+
+  /// <summary>
+  /// Creacion de la bomba
+  /// </summary>
+  /// <param name=""></param>
+  mBombaNode = mPlaneNode->createChildSceneNode("mBomba");
+  mBombaNode->scale(70, 70, 70);
+  bomba = new Bomba(mBombaNode);
+  mBombaNode->scale(.02, .02, .02);
+  addInputListener(bomba);
+
+  /// <summary>
+  /// Creacion del avion caza drones
+  /// </summary>
+  /// <param name=""></param>
+  mFictitiusNode = mPlaneNode->createChildSceneNode();
+  mAvionNode = mFictitiusNode->createChildSceneNode("mAvion");
+  avion = new Avion(mAvionNode);
+  mAvionNode->translate(0, 1000, 500);
+  addInputListener(avion);
+
+  /// <summary>
+  /// Niebla
+  /// </summary>
+  /// <param name=""></param>
+  /*BillboardSet* bbSet2 = mSM->createBillboardSet("fog", 10);
+  bbSet2->setDefaultDimensions(5000, 3500);
+  bbSet2->setMaterialName("Practica1/smoke");
+  mPlaneNode->attachObject(bbSet2);
+  Billboard* bb2 = bbSet2->createBillboard(Vector3(500.0, 1200.0, -500.0));*/
 
   /// <summary>
   /// Creacion del planeta
@@ -268,47 +305,6 @@ void IG2App::setupScene(void)
   mPlanetNode->attachObject(ent);
 
   mFictitiusNode = mPlanetNode->createChildSceneNode();*/
-
-  /// <summary>
-  /// Creacion de la bomba
-  /// </summary>
-  /// <param name=""></param>
-  mBombaNode = mPlaneNode->createChildSceneNode("mBomba");
-  mBombaNode->scale(70, 70, 70);
-  bomba = new Bomba(mBombaNode);
-  addInputListener(bomba);
-
-  /// <summary>
-  /// Creacion del avion caza drones
-  /// </summary>
-  /// <param name=""></param>
-  mFictitiusNode = mBombaNode->createChildSceneNode();
-  mAvionNode = mFictitiusNode->createChildSceneNode("mAvion");
-  avion = new Avion(mAvionNode);
-  mAvionNode->scale(.02, .02, .02);
-  mAvionNode->translate(0, 20, 20);
-  addInputListener(avion);
-
-  /// <summary>
-  /// BillboardSet
-  /// </summary>
-  /// <param name=""></param>
-  BillboardSet* bbSet = mSM->createBillboardSet("billboardSet", 1);
-  bbSet->setDefaultDimensions(100, 50);
-  bbSet->setMaterialName("Practica1/panel");
-  mAvionNode->attachObject(bbSet);
-
-  /// <summary>
-  /// Billboard
-  /// </summary>
-  /// <param name=""></param>
-  Billboard* bb = bbSet->createBillboard(Vector3(-150.0, 100.0, 0.0));
-
-  BillboardSet* bbSet2 = mSM->createBillboardSet("billboardSet2", 10);
-  bbSet2->setDefaultDimensions(1000, 1000);
-  bbSet2->setMaterialName("Practica1/smoke");
-  mPlaneNode->attachObject(bbSet2);
-  Billboard* bb2 = bbSet2->createBillboard(Vector3(0.0, 500.0, -500.0));
 
   /// <summary>
   /// Creacion del dron avispa

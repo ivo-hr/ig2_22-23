@@ -7,7 +7,9 @@ Avion::Avion(SceneNode* node) : EntidadIG(node)
 
 	mSM = mNode->getCreator();
 
-	mAvionNode = mNode->createChildSceneNode();
+	mFictitiusNode = mNode->createChildSceneNode();
+
+	mAvionNode = mFictitiusNode->createChildSceneNode();
 	ent = mSM->createEntity("sphere.mesh");
 	ent->setMaterialName("Practica1/red");
 	mAvionNode->attachObject(ent);
@@ -15,19 +17,19 @@ Avion::Avion(SceneNode* node) : EntidadIG(node)
 
 	for (int i = 0; i < 2; i++)
 	{
-		mAvionNode = mNode->createChildSceneNode();
+		mAvionNode = mFictitiusNode->createChildSceneNode();
 		ent = mSM->createEntity("cube.mesh");
 		ent->setMaterialName("Practica1/chess");
 		mAvionNode->attachObject(ent);
 		mAvionNode->translate(0, 50, -150 + 300 * i);
 		mAvionNode->setScale(1, .15, 2);
 
-		mAvionNode = mNode->createChildSceneNode();
+		mAvionNode = mFictitiusNode->createChildSceneNode();
 		mAvionNode->translate(50, 50, -150 + 300 * i);
 		blades.push_back(new AspasNave(mAvionNode, 5));
 	}
 
-	mAvionNode = mNode->createChildSceneNode();
+	mAvionNode = mFictitiusNode->createChildSceneNode();
 	ent = mSM->createEntity("Barrel.mesh");
 	ent->setMaterialName("Practica1/orange");
 	mAvionNode->attachObject(ent);
@@ -35,22 +37,31 @@ Avion::Avion(SceneNode* node) : EntidadIG(node)
 	mAvionNode->setScale(10.5, 3, 10.5);
 	mAvionNode->roll(Degree(90));
 
-	mAvionNode = mNode->createChildSceneNode();
+	mAvionNode = mFictitiusNode->createChildSceneNode();
 	ent = mSM->createEntity("ninja.mesh");
 	ent->setMaterialName("Practica1/yellow");
 	mAvionNode->attachObject(ent);
 	mAvionNode->yaw(Degree(-90));
 
-	// Sistema de particulas
-	ParticleSystem* pSys = mSM->createParticleSystem("psSmoke", "Practica1/smoke");
-	pSys->setEmitting(true);
-	mPSNode = mAvionNode->createChildSceneNode();
-	mPSNode->attachObject(pSys);
+	// BillboardSet
+	BillboardSet* bbSet = mSM->createBillboardSet("panel", 1);
+	bbSet->setDefaultDimensions(100, 50);
+	bbSet->setMaterialName("Practica1/panel");
+	mAvionNode->attachObject(bbSet);
 
-	/*RibbonTrail* ribbonTrail = mSM->createRibbonTrail();
-	ribbonTrail->setTrailLength(100);
-	ribbonTrail->setMaterialName("Practica1/ribbon");
-	mAvionNode->attachObject(ribbonTrail);*/
+	// Billboard
+	Billboard* bb = bbSet->createBillboard(Vector3(0.0, 100.0, 150.0));
+
+	// Sistema de particulas
+	pSysWake = mSM->createParticleSystem("psWake", "Practica1/smoke");
+	pSysWake->setEmitting(true);
+	mPSNode = mNode->createChildSceneNode();
+	mPSNode->attachObject(pSysWake);
+
+	// Explosion del avion
+	pSysExplosion = mSM->createParticleSystem("psExplosionPlane", "Practica1/explosion");
+	pSysExplosion->setEmitting(false);
+	mPSNode->attachObject(pSysExplosion);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) 
@@ -58,14 +69,13 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 	if (evt.keysym.sym == SDLK_h) 
 	{
 		//mNode->getParentSceneNode()->roll(Degree(-angle));
-		mNode->yaw(Degree(-angle));
+		mFictitiusNode->yaw(Degree(-angle));
 
 		for (auto e : blades) 
 		{
 			e->getBlade()->yaw(Degree(angle));
 			e->moveCylinders(angle);
 		}
-
 	}
 	else if (evt.keysym.sym == SDLK_j) 
 	{
@@ -76,6 +86,17 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 		{
 			e->getBlade()->yaw(Degree(angle));
 			e->rotateCylinders(angle);
+		}
+	}
+	else if (evt.keysym.sym == SDLK_r) 
+	{
+		if (pSysWake->getEmitting()) 
+		{
+			mFictitiusNode->setVisible(false);
+			pSysWake->setEmitting(false);
+			pSysExplosion->setEmitting(true);
+
+			sendEvent(MessageType::msgMuerte, this);
 		}
 	}
 

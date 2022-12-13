@@ -4,7 +4,6 @@
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
-#include <OgreTimer.h>
 
 #include "AspasNave.h"
 #include "EntidadIG.h"
@@ -33,9 +32,12 @@ protected:
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
 	AnimationState* dance = nullptr;
+	AnimationState* idleBase = nullptr;
+	AnimationState* idleTop = nullptr;
 	AnimationStateSet* aux = nullptr;
 
 	Timer* myTimer = new Timer();
+	bool isActive = true;
 
 	Entity* sword = nullptr;
 	bool leftSword = false;
@@ -45,8 +47,12 @@ protected:
 	float duration = 20.0;
 	float distance = 40.0;
 
+	bool dead = false;
+
 	virtual void frameRendered(const FrameEvent& evt);
+	virtual void receiveEvent(MessageType msgType, EntidadIG* entidad);
 
 	void runAnimation();
 	void danceAnimation();
+	void deathAnimation();
 };

@@ -11,17 +11,25 @@ Sinbad::Sinbad(SceneNode* node) : EntidadIG(node)
 	ent = mSM->createEntity("Sinbad.mesh");
 	mSinbadNode->attachObject(ent);
 
-	// Animacion tren inferior
+	// Animacion correr tren inferior
 	runBase = ent->getAnimationState("RunBase");
 	runBase->setLoop(true);
 
-	// Animacion tren superior
+	// Animacion correr tren superior
 	runTop = ent->getAnimationState("RunTop");
 	runTop->setLoop(true);
 
 	// Animacion baile
 	dance = ent->getAnimationState("Dance");
 	dance->setLoop(true);
+
+	// Animacion muerte tren inferior
+	idleBase = ent->getAnimationState("IdleBase");
+	idleBase->setLoop(true);
+
+	// Animacion muerte tren superior
+	idleTop = ent->getAnimationState("IdleTop");
+	idleTop->setLoop(true);
 
 	// Animacion inicial
 	runAnimation();
@@ -144,23 +152,31 @@ Sinbad::Sinbad(SceneNode* node) : EntidadIG(node)
 	animationState = mSM->createAnimationState("animS");
 	animationState->setEnabled(true);
 	animationState->setLoop(true);
+
+	addListener(this);
 }
 
 void Sinbad::frameRendered(const FrameEvent& evt) 
 {
-	runBase->addTime(evt.timeSinceLastFrame);
-	runTop->addTime(evt.timeSinceLastFrame);
-	dance->addTime(evt.timeSinceLastFrame);
-
-	animationState->addTime(evt.timeSinceLastFrame);
-
-	/*auto it3 = aux->getEnabledAnimationStates().begin();
-	while (it3 != aux->getEnabledAnimationStates().end()) 
+	if (!dead) 
 	{
-		auto s = ent->getAnimationState();
-		s->addTime(evt.timeSinceLastFrame);
-		++it;
-	}*/
+		runBase->addTime(evt.timeSinceLastFrame);
+		runTop->addTime(evt.timeSinceLastFrame);
+		dance->addTime(evt.timeSinceLastFrame);
+
+		animationState->addTime(evt.timeSinceLastFrame);
+	}
+	else 
+	{
+		idleBase->addTime(evt.timeSinceLastFrame);
+		idleTop->addTime(evt.timeSinceLastFrame);
+
+		if (isActive && myTimer->getMilliseconds() > 5000) 
+		{
+			isActive = !isActive;
+			sendEvent(MessageType::msgExplosion, this);
+		}
+	}
 
 	/*mNode->getParentSceneNode()->roll(Degree(-1));
 	if (myTimer->getMilliseconds() > Math::RangeRandom(100, 200)) 
@@ -168,6 +184,19 @@ void Sinbad::frameRendered(const FrameEvent& evt)
 		mNode->getParentSceneNode()->yaw(5 * Degree(2 * Math::RangeRandom(0, 2) - 1));
 		myTimer->reset();
 	}*/
+}
+
+void Sinbad::receiveEvent(MessageType msgType, EntidadIG* entidad) 
+{
+	switch (msgType)
+	{
+	case msgMuerte:
+		deathAnimation();
+		myTimer->reset();
+		break;
+	default:
+		break;
+	}
 }
 
 // Añade una espada a la mano izquierda o derecha
@@ -241,6 +270,8 @@ void Sinbad::changeAnimation()
 void Sinbad::runAnimation() 
 {
 	dance->setEnabled(false);
+	idleBase->setEnabled(false);
+	idleTop->setEnabled(false);
 
 	runBase->setEnabled(true);
 	runTop->setEnabled(true);
@@ -251,6 +282,25 @@ void Sinbad::danceAnimation()
 {
 	runBase->setEnabled(false);
 	runTop->setEnabled(false);
+	idleBase->setEnabled(false);
+	idleTop->setEnabled(false);
 
 	dance->setEnabled(true);
+}
+
+// Animacion de morir
+void Sinbad::deathAnimation() 
+{
+	runBase->setEnabled(false);
+	runTop->setEnabled(false);
+	dance->setEnabled(false);
+
+	idleBase->setEnabled(true);
+	idleBase->setEnabled(true);
+
+	animationState->setEnabled(false);
+
+	dead = !dead;
+	mSinbadNode->pitch(Degree(-90.0));
+	mSinbadNode->translate(0, -5, 0);
 }

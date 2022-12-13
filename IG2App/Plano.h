@@ -7,7 +7,6 @@
 #include <OgreMeshManager.h>
 #include <OgreInput.h>
 #include <SDL_keycode.h>
-#include <OgreTimer.h>
 
 #include "EntidadIG.h"
 

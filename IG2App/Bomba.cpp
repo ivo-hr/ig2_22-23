@@ -8,8 +8,11 @@ Bomba::Bomba(SceneNode* node) : EntidadIG(node)
 	mSM = mNode->getCreator();
 
 	mBombaNode = mNode->createChildSceneNode();
-	ent = mSM->createEntity("Barrel.mesh");
-	ent->setMaterialName("Practica1/chess");
+	//ent = mSM->createEntity("Barrel.mesh");
+	ent = mSM->createEntity("uv_sphere.mesh");
+	//ent->setMaterialName("Practica1/chess");
+	//ent->setMaterialName("Practica2GLSL/orangeBomb");
+	ent->setMaterialName("Practica2GLSL/bombaTeselada");
 	mBombaNode->attachObject(ent);
 
 	// Animacion desplazamiento
@@ -52,6 +55,12 @@ Bomba::Bomba(SceneNode* node) : EntidadIG(node)
 	animationState->setEnabled(true);
 	animationState->setLoop(true);
 
+	// Explosion de la bomba
+	pSysExplosion = mSM->createParticleSystem("psExplosionBomb", "Practica1/bomb");
+	pSysExplosion->setEmitting(false);
+	mPSNode = mNode->createChildSceneNode();
+	mPSNode->attachObject(pSysExplosion);
+
 	addListener(this);
 }
 
@@ -68,6 +77,10 @@ void Bomba::receiveEvent(MessageType msgType, EntidadIG* entidad)
 	case msgBomba: 
 		isMoving = !isMoving;
 		animationState->setEnabled(false);
+		break;
+	case msgExplosion:
+		mBombaNode->setVisible(false);
+		pSysExplosion->setEmitting(true);
 		break;
 	default: 
 		break;

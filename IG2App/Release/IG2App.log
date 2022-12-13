@@ -476,9 +476,9 @@ C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\Ogre
 C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\OgreTrays.h(1174,20): warning C4251: 'OgreBites::TrayManager::mWidgetDeathRow': class 'std::vector<OgreBites::Widget *,std::allocator<OgreBites::Widget *>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'OgreBites::TrayManager'
 C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\OGREsdk\include\OGRE\Bites\OgreTrays.h(189): message : vea la declaración de 'std::vector<OgreBites::Widget *,std::allocator<OgreBites::Widget *>>'
 C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\IG2App\IG2App.cpp(114,58): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\IG2App\IG2App.cpp(288,34): warning C4305: 'argumento': truncamiento de 'double' a 'Ogre::Real'
+C:\Users\Ale\Desktop\3V\IG2\ProyectosOGREvc15x86\IG2App\IG2App.cpp(274,34): warning C4305: 'argumento': truncamiento de 'double' a 'Ogre::Real'
   Generando código
-  1 of 911 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 913 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada

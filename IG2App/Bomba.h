@@ -21,6 +21,7 @@ protected:
 	SceneManager* mSM;
 
 	SceneNode* mBombaNode = nullptr;
+	SceneNode* mPSNode = nullptr;
 	Entity* ent = nullptr;
 
 	AnimationState* animationState = nullptr;
@@ -28,6 +29,8 @@ protected:
 	float distance = 2.0;
 
 	bool isMoving = true;
+
+	ParticleSystem* pSysExplosion = nullptr;
 
 	virtual void frameRendered(const FrameEvent& evt);
 	virtual void receiveEvent(MessageType msgType, EntidadIG* entidad);

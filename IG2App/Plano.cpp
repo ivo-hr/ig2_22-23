@@ -21,7 +21,7 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_r)
 	{
-		if (isActive) 
+		/*if (isActive) 
 		{
 			isMoving = !isMoving;
 
@@ -30,7 +30,7 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 		}
 
 		sendEvent(MessageType::msgNoria, this);
-		sendEvent(MessageType::msgMuñeco, this);
+		sendEvent(MessageType::msgMuñeco, this);*/
 	}
 	else if (evt.keysym.sym == SDLK_t) 
 	{
