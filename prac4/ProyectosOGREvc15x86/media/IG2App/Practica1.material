@@ -1,0 +1,315 @@
+material Practica1/orange
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.5 0.0 1.0
+        }
+    }
+}
+
+material Practica1/red
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.0 0.0 1.0
+        }
+    }
+}
+
+material Practica1/yellow
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 1.0 0.0 1.0
+        }
+    }
+}
+
+material Practica1/brown
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.59 0.29 0.0 1.0
+        }
+    }
+}
+
+material Practica1/cyan
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.0 1.0 1.0 1.0
+        }
+    }
+}
+
+material Practica1/amber
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.75 0.0 1.0
+        }
+    }
+}
+
+material Practica1/head
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.0 0.0 0.0 1.0
+            texture_unit
+            {
+                texture spotlight_image.png
+                colour_op add
+                env_map spherical
+            }
+        }
+    }
+}
+
+material Practica1/redHead
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.0 0.0 1.0
+            texture_unit
+            {
+                texture spotlight_image.png
+                colour_op modulate
+                env_map spherical
+            }
+        }
+    }
+}
+
+material Practica1/body
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.5 1.0
+            texture_unit
+            {
+                texture checker.png
+                colour_op add
+                env_map spherical
+            }
+        }
+    }
+}
+
+material Practica1/chess
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 1.0 1.0 1.0
+            ambient 0.0 0.0 0.0 1.0
+            texture_unit
+            {
+                texture checker.png
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/redBody
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.0 0.0 1.0
+            texture_unit
+            {
+                texture checker.png
+                colour_op modulate
+                env_map spherical
+            }
+        }
+    }
+}
+
+material Practica1/water
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.5 1.0
+            texture_unit
+            {
+                texture Water02.jpg
+                colour_op add
+                scroll_anim -0.1 0.1
+                rotate -135.0
+            }
+        }
+    }
+}
+
+material Practica1/stopWater
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.5 1.0
+            texture_unit
+            {
+                texture Water02.jpg
+                colour_op add
+                rotate 90.0
+            }
+        }
+    }
+}
+
+material Practica1/bucket
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.5 1.0
+            texture_unit
+            {
+                texture BumpyMetal.jpg
+                colour_op add
+            }
+        }
+    }
+}
+
+material Practica1/droneArm
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.0 1.0
+            texture_unit
+            {
+                texture BumpyMetal.jpg
+                colour_op add
+            }
+        }
+    }
+}
+
+material Practica1/stones
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.5 0.5 0.5 1.0
+            texture_unit
+            {
+                texture BeachStones.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/dirt
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 1.0 1.0 1.0
+            texture_unit
+            {
+                texture dirt01.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/panel
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            texture_unit
+            {
+                texture 10points.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+material Practica1/smoke
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+            diffuse vertexcolour
+
+            texture_unit
+            {
+                texture smoke.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+material Practica1/space
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.5 0.5 0.5 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            lighting off
+
+            texture_unit // Texture_unit_0
+            {
+                texture lightMap.jpg
+                tex_coord_set 0
+                colour_op modulate
+                text_address_mode wrap
+            }
+
+            texture_unit // Texture_unit_1
+            {
+                texture spaceSky.jpg
+                tex_coord_set 0
+                colour_op modulate
+                rotate_anim 0.01
+                tex_address_mode wrap
+            }
+        }
+    }
+}
